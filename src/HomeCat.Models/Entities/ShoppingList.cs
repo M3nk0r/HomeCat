@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace CrossCutting.HomeCat.Models.Entities;
 
+[PrimaryKey(nameof(Id), nameof(UserId))]
 public class ShoppingList
 {
     public required string UserId { get; set; }
@@ -9,5 +12,6 @@ public class ShoppingList
     public int Count { get; set; }
     public bool Bought { get; set; }
     public string? ProductId { get; set; }
+    public Product? Product { get; set; }
     public int? Category { get; set; }
 }
