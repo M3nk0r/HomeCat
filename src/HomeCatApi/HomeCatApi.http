@@ -4,3 +4,32 @@ GET {{HomeCatApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{HomeCatApi_HostAddress}}/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Wert123!"
+}
+
+###
+
+POST {{HomeCatApi_HostAddress}}/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Wert123!"
+}
+
+
+###
+
+POST {{HomeCatApi_HostAddress}}/manage/info
+Content-Type: application/json
+Authorization: Bearer CfDJ8JoZyhYMy2xCn1dKlITQ2wIZFEdzP5BpSUcHxRKT83kgJrGBHpMiT0uHjjQShLNE3U32M_J_IBfEJV6H-YDjVEzbFUq1vUCAR1YO5jmaPYMJnO-H6TaHxOmqhWqoea0i83svzwDl4bJtx9P9pI5orjb_kNNV_FL4B97fnVnykSL5OD-0tQy7Z9znQXY9cuqNTp9OavzrIbwzqWmE4ZlN9J1eKLfWTIAEeZuUjZe4JdBPm-hwt1OWywqMvGsItcNqeqd9z2dFvs5k9l43PZMnFlhzegnUfbagtqxcsquWm1Z21MgxwgsRJOMliEG0WXAs31pn3OU_4X-lsQEcFjBJ_n9IrT5713DZeQmFbNf2AsEMRK7t5vE1Xx4OIhYYT_FKYWNApMxWTCRuLF8qlNgDVpv9311vd8_LLbT1hpZi2zWF8Q7UCHoMcKQjV_Y2lG0NrwMLGQXke_GnqNG9s8tntUYQ_yX9VNSKdzN9Ca0f7ai1f-fjNFsaLIDN3hNn29ZbbZvP22kmk32syo4sT5XLLiYQgvL2Adf0uu1VzNpsJEIvZlM1xeyh1Yh0FChijV4Upr5kC5B6qJT3aYkOpuMDPSia-R2d8yIInZGrWG1TSRMpwo1i_yZQRa4RjVfPmrLw7HFi64nLT_0vRIU-4EoBU4oY0Apu5e4Fcxtuz8aCdOXQuptrf_jJR8vlOIFnxf5vhQ
+
+{
+  "newUserName": "Test User"
+}
