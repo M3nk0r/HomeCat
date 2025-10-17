@@ -1,9 +1,11 @@
 ﻿using CrossCutting.HomeCat.Models.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.HomeCat.Data;
 
-public class HomeCatContext : DbContext
+public class HomeCatContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Pantry> Pantry { get; set; }
     public DbSet<Product> Product { get; set; }
