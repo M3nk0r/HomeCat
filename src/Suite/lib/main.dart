@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suite/data/db_context.dart';
 import 'package:suite/ui/router.dart';
 import 'package:suite/ui/theme.dart';
 import 'injection.dart' as injection;
@@ -7,6 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await injection.init();
 
+  DbContext dbContext = injection.sl<DbContext>();
+  await dbContext.init();
 
   runApp(MyApp());
 }
