@@ -9,6 +9,7 @@ class AppRouter extends RootStackRouter {
 
     AutoRoute(page: HomeRoute.page, initial: false),
     AutoRoute(page: RoomOverviewRoute.page, initial: true),
-    AutoRoute(page: RoomDetailRoute.page)
+    AutoRoute(page: RoomDetailRoute.page),
+    AutoRoute(page: AddTaskRoute.page),
   ];
 }

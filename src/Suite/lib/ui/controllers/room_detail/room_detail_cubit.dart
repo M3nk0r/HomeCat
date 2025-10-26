@@ -14,4 +14,9 @@ class RoomDetailCubit extends Cubit<RoomDetailState> {
 
     emit(state.copyWith(room: room, tasks: tasks));
   }
+
+  Future<void> refreshTasks() async {
+    final tasks = await taskService.readTaskWrapperByRoom(state.room.id, state.room.userId);
+    emit(state.copyWith(tasks: tasks));
+  }
 }

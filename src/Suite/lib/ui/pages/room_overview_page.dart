@@ -27,7 +27,7 @@ class RoomOverviewPage extends StatelessWidget {
                   builder: (builderDialog) => AddRoomDialog(),
                 );
 
-                if (roomName != null) {
+                if (roomName != null && context.mounted) {
                   await context.read<RoomOverviewCubit>().addRoom(roomName);
                 }
               },
