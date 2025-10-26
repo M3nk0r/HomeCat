@@ -17,7 +17,7 @@ Future<void> init() async {
   // Blocs and Cubits
   sl.registerFactory(() => HomeCubit());
   sl.registerFactory(() => RoomOverviewCubit(roomService: sl()));
-  sl.registerFactory(() => RoomDetailCubit(taskService: sl()));
+  sl.registerFactory(() => RoomDetailCubit(taskService: sl(), completedTaskService: sl()));
   sl.registerFactory(() => AddTaskCubit(taskService: sl()));
 
   //Services

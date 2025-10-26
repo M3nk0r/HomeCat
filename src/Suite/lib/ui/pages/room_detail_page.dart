@@ -25,7 +25,7 @@ class RoomDetailPage extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               onPressed: () async {
                 await context.router.push(AddTaskRoute(room: state.room));
-                if(context.mounted){
+                if (context.mounted) {
                   await context.read<RoomDetailCubit>().refreshTasks();
                 }
               },
@@ -40,6 +40,12 @@ class RoomDetailPage extends StatelessWidget {
                   return ListTile(
                     title: Text(taskWrapper.task.name),
                     subtitle: Text((taskWrapper.lastDone() ?? '').toString()),
+                    trailing: IconButton(
+                      onPressed: () async => await context
+                          .read<RoomDetailCubit>()
+                          .taskDone(taskWrapper.task),
+                      icon: Icon(Icons.check),
+                    ),
                   );
                 },
               ),

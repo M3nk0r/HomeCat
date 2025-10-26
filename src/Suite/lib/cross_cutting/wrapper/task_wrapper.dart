@@ -8,7 +8,7 @@ class TaskWrapper{
   TaskWrapper({required this.task, required this.completedTasks});
 
   DateTime? lastDone() {
-    completedTasks.sort((a, b) => a.done.compareTo(b.done));
+    completedTasks.sort((a, b) => b.done.compareTo(a.done));
     return completedTasks.firstOrNull?.done;
   }
 
