@@ -39,7 +39,7 @@ class RoomDetailPage extends StatelessWidget {
                   final taskWrapper = state.tasks[index];
                   return ListTile(
                     title: Text(taskWrapper.task.name),
-                    subtitle: Text(taskWrapper.lastDone().toString()),
+                    subtitle: Text((taskWrapper.lastDone() ?? '').toString()),
                   );
                 },
               ),

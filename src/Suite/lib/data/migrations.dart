@@ -1,4 +1,3 @@
-
 class Migrations {
   static Map<int, String> migrationScripts = {
     1: '''create table Room
@@ -9,11 +8,11 @@ class Migrations {
     constraint Room_pk
         primary key (id, userId)
 );''',
-    2:'''create table Task
+    2: '''create table Task
 (
     id          TEXT    not null,
     userId      TEXT    not null,
-    Name        TEXT    not null,
+    name        TEXT    not null,
     interval    integer not null,
     intervalTyp integer not null,
     duration    integer not null,
@@ -23,8 +22,8 @@ class Migrations {
         primary key (id, userId),
     constraint Task_Room_id_userId_fk
         foreign key (roomId, roomUserId) references Room
-);
-    create table CompletedTask
+);''',
+    3: '''create table CompletedTask
 (
     taskId     TEXT not null,
     taskUserId TEXT not null,
@@ -35,7 +34,6 @@ class Migrations {
     constraint CompletedTask_Task_id_userId_fk
         foreign key (taskId, taskUserId) references Task
 );
-    '''
+    ''',
   };
-
 }
