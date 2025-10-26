@@ -8,8 +8,8 @@ class Migrations {
     name   TEXT not null,
     constraint Room_pk
         primary key (id, userId)
-);
-    create table Task
+);''',
+    2:'''create table Task
 (
     id          TEXT    not null,
     userId      TEXT    not null,

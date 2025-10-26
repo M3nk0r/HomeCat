@@ -7,6 +7,7 @@ import 'package:suite/logic/services/interfaces/task_service.dart';
 import 'package:suite/logic/services/room_service_impl.dart';
 import 'package:suite/logic/services/task_service_impl.dart';
 import 'package:suite/ui/controllers/home/home_cubit.dart';
+import 'package:suite/ui/controllers/room_detail/room_detail_cubit.dart';
 import 'package:suite/ui/controllers/room_overview/room_overview_cubit.dart';
 
 final sl = GetIt.instance;
@@ -15,6 +16,7 @@ Future<void> init() async {
   // Blocs and Cubits
   sl.registerFactory(() => HomeCubit());
   sl.registerFactory(() => RoomOverviewCubit(roomService: sl()));
+  sl.registerFactory(() => RoomDetailCubit(taskService: sl()));
 
   //Services
   sl.registerLazySingleton<RoomService>(() => RoomServiceImpl(context: sl()));
