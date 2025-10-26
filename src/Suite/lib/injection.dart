@@ -6,6 +6,7 @@ import 'package:suite/logic/services/interfaces/room_service.dart';
 import 'package:suite/logic/services/interfaces/task_service.dart';
 import 'package:suite/logic/services/room_service_impl.dart';
 import 'package:suite/logic/services/task_service_impl.dart';
+import 'package:suite/ui/controllers/add_task/add_task_cubit.dart';
 import 'package:suite/ui/controllers/home/home_cubit.dart';
 import 'package:suite/ui/controllers/room_detail/room_detail_cubit.dart';
 import 'package:suite/ui/controllers/room_overview/room_overview_cubit.dart';
@@ -17,6 +18,7 @@ Future<void> init() async {
   sl.registerFactory(() => HomeCubit());
   sl.registerFactory(() => RoomOverviewCubit(roomService: sl()));
   sl.registerFactory(() => RoomDetailCubit(taskService: sl()));
+  sl.registerFactory(() => AddTaskCubit(taskService: sl()));
 
   //Services
   sl.registerLazySingleton<RoomService>(() => RoomServiceImpl(context: sl()));
