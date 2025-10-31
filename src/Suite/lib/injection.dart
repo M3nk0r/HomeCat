@@ -20,7 +20,7 @@ Future<void> init() async {
   sl.registerFactory(() => RoomOverviewCubit(roomService: sl()));
   sl.registerFactory(() => RoomDetailCubit(taskService: sl(), completedTaskService: sl()));
   sl.registerFactory(() => TaskFormCubit(taskService: sl()));
-  sl.registerFactory(() => TaskDetailCubit(taskService: sl()));
+  sl.registerFactory(() => TaskDetailCubit(taskService: sl(), completedTaskService: sl()));
 
   //Services
   sl.registerLazySingleton<RoomService>(() => RoomServiceImpl(context: sl()));
