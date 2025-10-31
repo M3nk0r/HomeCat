@@ -93,4 +93,33 @@ class TaskServiceImpl extends TaskService {
 
     return wrapper;
   }
+
+  @override
+  Future<TaskWrapper> readTaskWrapperById(String id, String userId) async {
+    final db = await context.open();
+
+    final taskMap = await db.query(
+      Task.dbName,
+      where: 'id = ? and userId = ?',
+      whereArgs: [id, userId],
+    );
+
+    if (taskMap.isEmpty) {
+      throw Error();
+    }
+
+    final task = Task.fromMap(taskMap.first);
+
+    final ctMaps = await db.query(
+      CompletedTask.dbName,
+      where: 'taskId = ? and taskUserId = ?',
+      whereArgs: [task.id, task.userId],
+    );
+
+    return TaskWrapper(
+      task: task,
+      completedTasks: [for (final map in ctMaps) CompletedTask.fromMap(map)],
+    );
+
+  }
 }
