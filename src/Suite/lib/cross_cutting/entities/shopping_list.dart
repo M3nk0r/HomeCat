@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class ShoppingList {
   final String id;
   final String userId;
@@ -17,5 +19,9 @@ class ShoppingList {
       userId: map['userId'] as String,
       name: map['name'] as String,
     );
+  }
+
+  factory ShoppingList.create({required userId, required name}){
+    return ShoppingList(id: Uuid().v8(), userId: userId, name: name);
   }
 }

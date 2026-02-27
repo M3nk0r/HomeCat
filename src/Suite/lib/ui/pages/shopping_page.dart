@@ -9,6 +9,7 @@ import 'package:suite/ui/pages/shopping/shopping_list_page.dart';
 import 'package:suite/ui/router.gr.dart';
 import 'package:suite/ui/widgets/add_shopping_list_dialog.dart';
 import 'package:suite/ui/widgets/circle_button.dart';
+import 'package:suite/ui/widgets/confirm_dialog.dart';
 import 'package:suite/ui/widgets/expandable_fab.dart';
 
 @RoutePage()
@@ -87,13 +88,23 @@ class ShoppingPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: state.shoppingLists.length,
                 itemBuilder: (context, index) {
+                  final shoppingList = state.shoppingLists[index];
                   return ListTile(
-                    title: Text(state.shoppingLists[index].name),
+                    title: Text(shoppingList.name),
                     onTap: () => context.router.push(
                       ShoppingListRoute(
-                        shoppingList: state.shoppingLists[index],
+                        shoppingList: shoppingList,
                       ),
                     ),
+                    onLongPress: () async {
+                      final confirm = await showDialog<bool?>(
+                        context: context,
+                        builder: (builderDialog) => ConfirmDialog(message: 'Do you want delete ${shoppingList.name}',),
+                      );
+                      if (context.mounted && confirm == true) {
+                        await context.read<ShoppingCubit>().delete(shoppingList);
+                      }
+                    },
                   );
                 },
               ),

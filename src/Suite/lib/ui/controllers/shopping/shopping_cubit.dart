@@ -15,10 +15,16 @@ class ShoppingCubit extends Cubit<ShoppingState> {
 
   Future<void> addShoppingList(String name) async {
 
-    final shoppingList = ShoppingList(id: '', userId: '', name: name);
+    final shoppingList = ShoppingList.create(userId: '', name: name);
 
     await shoppingListService.create(shoppingList);
 
+    await _reloadShoppingList();
+  }
+
+  Future<void> delete(ShoppingList shoppingList) async {
+
+    await shoppingListService.delete(shoppingList);
     await _reloadShoppingList();
   }
 
