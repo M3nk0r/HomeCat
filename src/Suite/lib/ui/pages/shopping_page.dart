@@ -7,7 +7,9 @@ import 'package:suite/ui/controllers/shopping/shopping_cubit.dart';
 import 'package:suite/ui/controllers/shopping/shopping_state.dart';
 import 'package:suite/ui/pages/shopping/shopping_list_page.dart';
 import 'package:suite/ui/router.gr.dart';
+import 'package:suite/ui/widgets/add_shopping_list_dialog.dart';
 import 'package:suite/ui/widgets/circle_button.dart';
+import 'package:suite/ui/widgets/confirm_dialog.dart';
 import 'package:suite/ui/widgets/expandable_fab.dart';
 
 @RoutePage()
@@ -18,7 +20,7 @@ class ShoppingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BlocProvider(
-      create: (context) => sl<ShoppingCubit>(),
+      create: (context) => sl<ShoppingCubit>()..init(),
       child: BlocBuilder<ShoppingCubit, ShoppingState>(
         builder: (context, state) {
           return Scaffold(
@@ -53,7 +55,18 @@ class ShoppingPage extends StatelessWidget {
                     ),
                   ),
                   containerColor: theme.colorScheme.primaryContainer,
-                  onTap: () => context.router.push(ShoppingListRoute()),
+                  onTap: () async {
+                    final shoppingListName = await showDialog<String?>(
+                      context: context,
+                      builder: (builderDialog) => AddShoppingListDialog(),
+                    );
+
+                    if (shoppingListName != null && context.mounted) {
+                      await context.read<ShoppingCubit>().addShoppingList(
+                        shoppingListName,
+                      );
+                    }
+                  },
                 ),
                 CircleButton(
                   size: 64,
@@ -72,9 +85,28 @@ class ShoppingPage extends StatelessWidget {
             ),
             body: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: SingleChildScrollView(
-                physics: const ScrollPhysics(),
-                child: Column(children: []),
+              child: ListView.builder(
+                itemCount: state.shoppingLists.length,
+                itemBuilder: (context, index) {
+                  final shoppingList = state.shoppingLists[index];
+                  return ListTile(
+                    title: Text(shoppingList.name),
+                    onTap: () => context.router.push(
+                      ShoppingListRoute(
+                        shoppingList: shoppingList,
+                      ),
+                    ),
+                    onLongPress: () async {
+                      final confirm = await showDialog<bool?>(
+                        context: context,
+                        builder: (builderDialog) => ConfirmDialog(message: 'Do you want delete ${shoppingList.name}',),
+                      );
+                      if (context.mounted && confirm == true) {
+                        await context.read<ShoppingCubit>().delete(shoppingList);
+                      }
+                    },
+                  );
+                },
               ),
             ),
           );
